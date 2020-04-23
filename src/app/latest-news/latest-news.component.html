@@ -1,0 +1,13 @@
+<div class="">
+    <h2 class="text-center">Latest News</h2>
+</div>
+<div *ngFor="let news of newsList" class="news_box">
+    <p><span>Author : </span> {{ news?.author }}</p>
+    <p><span>Title: </span> {{ news?.title }}</p>
+    <p><span>Description: </span> {{ news?.description }}</p>
+    <p><span>Source Name: </span> <a target="_blank" href="https://{{ news?.source.name }}">{{ news?.source.name }}</a></p>
+    <p><span>Url: </span> <a target="_blank" href="{{ news?.url }}">{{ news?.url }}</a></p>
+    <p><span>PublishedAt: </span> {{ transform(news?.publishedAt) }}</p>
+    <p><span>Content: </span> {{ news?.content }}</p>
+    <img src="{{ news?.urlToImage }}" height="100px" width="100px" alt="No Image">
+</div>

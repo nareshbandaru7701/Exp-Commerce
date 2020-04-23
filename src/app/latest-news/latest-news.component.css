@@ -1,0 +1,10 @@
+span {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.news_box {
+    margin-bottom: 10px;
+    border: 1px solid;
+    padding: 5px;
+}

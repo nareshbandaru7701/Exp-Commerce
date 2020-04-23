@@ -1,0 +1,113 @@
+<div>
+    <h2 class="text-center">Visitor Form</h2>
+</div>
+
+<form [formGroup]="visitorForm" autocomplete="off" (ngSubmit)="visitor_Form()">
+    <div class="">
+        <mat-form-field class="form-element">
+            <input matInput placeholder="Full name" formControlName="fullName" class="">
+            <mat-error>
+                <div class="error" *ngIf="visitorForm.get('fullName').hasError('required') && visitorForm.get('fullName').touched">
+                    Name is required
+                </div>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+            <input matInput placeholder="Email" formControlName="email" class="">
+            <mat-error>
+                <div class="error" *ngIf="visitorForm.get('email').hasError('required') && visitorForm.get('email').touched">
+                    Email is required
+                </div>
+                <div class="error" *ngIf="visitorForm.get('email').hasError('pattern')">
+                    Please enter correct email address
+                </div>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+            <mat-label>Select Type of Visit</mat-label>
+            <mat-select formControlName="visitType">
+                <mat-option *ngFor="let visit of typeOfVisit" [value]="visit.reason">
+                    {{ visit.reason }}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <div class="error" *ngIf="visitorForm.get('visitType').hasError('required') && visitorForm.get('visitType').touched">
+                    Select reason
+                </div>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+            <input matInput placeholder="Person to Visit" formControlName="personToMeet" class="">
+            <mat-error>
+                <div class="error" *ngIf="visitorForm.get('personToMeet').hasError('required') && visitorForm.get('personToMeet').touched">
+                    Please enter whom to meet
+                </div>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+            <input matInput [matDatepicker]="picker1" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            <mat-error>
+                <div class="error" *ngIf="visitorForm.get('date').hasError('required') && visitorForm.get('date').touched">
+                    Please select date
+                </div>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+            <input matInput [owlDateTime]="dt3" formControlName="entryTime" [owlDateTimeTrigger]="dt3"
+                placeholder="Select Entry Time" readonly>
+            <owl-date-time [pickerType]="'timer'" #dt3></owl-date-time>
+            <mat-error>
+                <div class="error" *ngIf="visitorForm.get('entryTime').hasError('required') && visitorForm.get('entryTime').touched">
+                    Please select entry time
+                </div>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+            <input matInput [owlDateTime]="dt4" formControlName="exitTime" [owlDateTimeTrigger]="dt4"
+                placeholder="Select Exit Time" readonly>
+            <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
+            <mat-error>
+                <div class="error" *ngIf="visitorForm.get('exitTime').hasError('required') && visitorForm.get('exitTime').touched">
+                    Please select exit time
+                </div>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="">
+        <div style="margin-left: 30px;">
+            <webcam [height]="400" [width]="400" [trigger]="triggerObservable" 
+                (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+                [allowCameraSwitch]="allowCameraSwitch" (imageCapture)="handleImage($event)">
+            </webcam>
+            <br/>
+            <div *ngIf="imageCaptureText">
+                <p style="color: green;">Image Successfully Captured</p>
+                <img [src]="Capturedimage" height="100px" width="100px">
+            </div>
+            <br/>
+            <div>
+                <button type="button" class="btn btn-primary" (click)="triggerSnapshot();" title="Take Picture">Take Selfie</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="">
+        <div class="form-element" style="padding-top: 30px;">
+            <button type="submit" class="btn btn-success d-block btn-block" [disabled]="!visitorForm.valid || !imageCaptureText">Submit Details</button>
+        </div>
+    </div>
+</form>
+
+<h4 *ngIf="errors.length > 0">Messages:</h4>
+<ul *ngFor="let error of errors">
+	<li>{{error | json}}</li>
+</ul>

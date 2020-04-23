@@ -1,0 +1,20 @@
+<div>
+    <h2 class="text-center">Visitor Details</h2>
+</div>
+
+<div class="">
+    <p><span>Full Name : </span> {{ visitorInfo?.fullName }}</p>
+    <p><span>Email : </span> {{ visitorInfo?.email }}</p>
+    <p><span>Type of Visit : </span> {{ visitorInfo?.visitType }}</p>
+    <p><span>Person to Meet: </span> {{ visitorInfo?.personToMeet }}</p>
+    <p><span>Date of Visit : </span> {{ visitorInfo?.date | date }}</p>
+    <p><span>Entry Time : </span> {{ visitorInfo?.entryTime | date:'h:mm a' }}</p>
+    <p><span>Exit Time : </span> {{ visitorInfo?.exitTime | date:'h:mm a' }}</p>
+    <p><span> Selfie Image : </span>
+        <img [src]="visitorInfo.imageUrl" width="150px" height="150px">
+    </p>
+</div>
+
+<div class="pull-right">
+    <button type="button" class="btn btn-primary" routerLink="">Back to Home</button>
+</div>
