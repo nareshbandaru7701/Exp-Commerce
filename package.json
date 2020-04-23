@@ -21,7 +21,7 @@
     "@angular/platform-browser": "~9.0.5",
     "@angular/platform-browser-dynamic": "~9.0.5",
     "@angular/router": "~9.0.5",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "jquery": "^3.5.0",
     "ng-pick-datetime": "^7.0.0",
     "ngx-webcam": "^0.3.0",
